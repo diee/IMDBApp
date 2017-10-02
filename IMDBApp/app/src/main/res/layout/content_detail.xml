@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+    android:layout_marginRight="@dimen/activity_horizontal_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.example.dalarcon.imdbapp.ui.DetailActivity"
+    tools:showIn="@layout/activity_detail">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/DetailTitle"
+            tools:text="DEADPOOL" />
+
+        <ImageView
+            android:id="@+id/iv_poster"
+            android:layout_width="120dp"
+            android:layout_height="160dp"
+            android:transitionName="poster"
+            android:scaleType="centerCrop"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/tv_title"/>
+
+        <TextView
+            android:layout_marginTop="20dp"
+            style="@style/InfoDetailText"
+            android:id="@+id/tv_release_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/tv_title"
+            tools:text="Release date: 2016-10-11" />
+
+        <TextView
+            style="@style/InfoDetailText"
+            android:id="@+id/tv_original_language"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/tv_release_date"
+            tools:text="Original Language: en" />
+
+        <TextView
+            style="@style/InfoDetailText"
+            android:id="@+id/tv_origin_country"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/tv_original_language"
+            tools:text="Origina Country: US" />
+
+        <TextView
+            style="@style/InfoDetailText"
+            android:id="@+id/tv_public"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/tv_origin_country"
+            tools:text="Just For Adult" />
+
+        <TextView
+            style="@style/InfoDetailText"
+            android:id="@+id/tv_popularity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/tv_public"
+            tools:text="Popularity: 1000.123" />
+
+        <TextView
+            style="@style/InfoDetailText"
+            android:id="@+id/tv_vote_avarage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/tv_popularity"
+            tools:text="Vote Avarage: 2112" />
+
+        <TextView
+            android:layout_marginTop="10dp"
+            style="@style/OverviewDetailText"
+            android:id="@+id/tv_overview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/iv_poster"
+            tools:text="The Big Bang Theory is centered on five characters living in Pasadena, California: roommates Leonard Hofstadter and Sheldon Cooper" />
+
+    </RelativeLayout>
+</android.support.v4.widget.NestedScrollView>

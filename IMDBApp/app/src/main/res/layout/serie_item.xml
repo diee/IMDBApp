@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/card_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        card_view:cardCornerRadius="10dp"
+        card_view:cardElevation="5dp"
+        card_view:cardUseCompatPadding="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/iv_poster"
+                android:layout_width="120dp"
+                android:layout_height="150dp"
+                android:src="@mipmap/poster_test" />
+
+            <TextView
+                android:id="@+id/tv_name"
+                style="@style/ItemTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="15dp"
+                android:layout_toEndOf="@+id/iv_poster"
+                android:text="The Big Bang Theory" />
+
+            <TextView
+                android:id="@+id/tv_country"
+                style="@style/ItemInfoText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/tv_name"
+                android:layout_below="@+id/tv_name"
+                android:text="Origin Country / Language: US / en" />
+
+            <TextView
+                android:id="@+id/tv_first_air_date"
+                style="@style/ItemInfoText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/tv_country"
+                android:layout_below="@+id/tv_country"
+                android:text="First Air Date: 2007-09-24" />
+
+            <TextView
+                android:id="@+id/tv_popularity"
+                style="@style/ItemInfoText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/tv_first_air_date"
+                android:layout_below="@+id/tv_first_air_date"
+                android:text="Popularity: 256.063735" />
+
+            <TextView
+                android:id="@+id/tv_overview"
+                style="@style/ItemOverviewText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/tv_popularity"
+                android:layout_below="@+id/tv_popularity"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:text="The Big Bang Theory is centered on five characters living in Pasadena, California: roommates Leonard Hofstadter and Sheldon Cooper" />
+
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+</LinearLayout>

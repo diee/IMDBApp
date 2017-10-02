@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">IMDBApp</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- Movies View -->
+    <string name="movies_tab_title">Movies</string>
+    <string name="release_text">Released: %1$s</string>
+
+    <!-- Series View -->
+    <string name="series_tab_title">Series</string>
+    <string name="first_air_date_text">First Air Date: %1$s</string>
+    <string name="popularity_text">Popularity: %1$s</string>
+    <string name="country_lang_text">Origin Country: %1$s / Lang: %2$s</string>
+
+    <!-- Object Detail -->
+    <string name="original_language_text">Original Language: %1$s</string>
+    <string name="country_text">Origin Country: %1$s</string>
+    <string name="adult_only_text">Just for Adult</string>
+    <string name="not_adult_only_text">For General Public</string>
+    <string name="vote_avarage_text">Vote Avarage: %1$s</string>
+
+    <string name="title_activity_image">ImageActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+
+</resources>
