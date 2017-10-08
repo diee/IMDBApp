@@ -19,8 +19,47 @@
     <string name="not_adult_only_text">For General Public</string>
     <string name="vote_avarage_text">Vote Avarage: %1$s</string>
 
-    <string name="title_activity_image">ImageActivity</string>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <!-- Key name for movie -->
+    <string name="movie_key" translatable="false">movie</string>
+    <!-- Key name for serie -->
+    <string name="serie_key" translatable="false">serie</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Settings Strings -->
+
+    <!-- Label for the sort popularity desc preferences -->
+    <string name="pref_sort_popularity_desc_label">Sort Popularity</string>
+    <!-- Key name for sort popularity desc in preferences-->
+    <string name="pref_sort_desc_key" translatable="false">sort_popularity</string>
+    <!-- Values for sort popularity in preferences -->
+    <string name="pref_sort_desc_default" translatable="false">popularity.desc</string>
+    <string name="pref_sort_asc_value" translatable="false">popularity.asc</string>
+
+    <!-- Key name for year preference in SharedPreferences -->
+    <string name="pref_year_key" translatable="false">year</string>
+    <string name="pref_year_label">Filter by Year</string>
+
+    <!-- Checkboxes Labels -->
+    <string name="pref_desc_true">Descendant</string>
+    <string name="pref_desc_false">Ascendant</string>
+
+    <!-- List Labels -->
+    <string name="pref_year_2017_label">2017</string>
+    <string name="pref_year_2016_label">2016</string>
+    <string name="pref_year_2015_label">2015</string>
+    <string name="pref_year_2014_label">2014</string>
+    <string name="pref_year_2013_label">2013</string>
+    <string name="pref_year_all_label">All</string>
+
+    <!-- Value for year option -->
+    <string name="pref_year_2017_value" translatable="false">2017</string>
+    <string name="pref_year_2016_value" translatable="false">2016</string>
+    <string name="pref_year_2015_value" translatable="false">2015</string>
+    <string name="pref_year_2014_value" translatable="false">2014</string>
+    <string name="pref_year_2013_value" translatable="false">2013</string>
+    <string name="pref_year_default_value" translatable="false">0</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

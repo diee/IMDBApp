@@ -7,7 +7,6 @@
     android:layout_marginLeft="@dimen/activity_horizontal_margin"
     android:layout_marginRight="@dimen/activity_horizontal_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.example.dalarcon.imdbapp.ui.DetailActivity"
     tools:showIn="@layout/activity_detail">
 
     <RelativeLayout
@@ -16,33 +15,33 @@
 
         <TextView
             android:id="@+id/tv_title"
+            style="@style/DetailTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/DetailTitle"
             tools:text="DEADPOOL" />
 
         <ImageView
             android:id="@+id/iv_poster"
             android:layout_width="120dp"
             android:layout_height="160dp"
-            android:transitionName="poster"
-            android:scaleType="centerCrop"
             android:layout_alignParentEnd="true"
-            android:layout_below="@+id/tv_title"/>
+            android:layout_below="@+id/tv_title"
+            android:transitionName="poster"
+            tools:ignore="UnusedAttribute" />
 
         <TextView
-            android:layout_marginTop="20dp"
-            style="@style/InfoDetailText"
             android:id="@+id/tv_release_date"
+            style="@style/InfoDetailText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/tv_title"
+            android:layout_marginTop="20dp"
             tools:text="Release date: 2016-10-11" />
 
         <TextView
-            style="@style/InfoDetailText"
             android:id="@+id/tv_original_language"
+            style="@style/InfoDetailText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
@@ -50,8 +49,9 @@
             tools:text="Original Language: en" />
 
         <TextView
-            style="@style/InfoDetailText"
+            android:visibility="gone"
             android:id="@+id/tv_origin_country"
+            style="@style/InfoDetailText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
@@ -59,8 +59,9 @@
             tools:text="Origina Country: US" />
 
         <TextView
-            style="@style/InfoDetailText"
+            android:visibility="gone"
             android:id="@+id/tv_public"
+            style="@style/InfoDetailText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
@@ -68,8 +69,8 @@
             tools:text="Just For Adult" />
 
         <TextView
-            style="@style/InfoDetailText"
             android:id="@+id/tv_popularity"
+            style="@style/InfoDetailText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
@@ -77,8 +78,8 @@
             tools:text="Popularity: 1000.123" />
 
         <TextView
-            style="@style/InfoDetailText"
             android:id="@+id/tv_vote_avarage"
+            style="@style/InfoDetailText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
@@ -86,14 +87,30 @@
             tools:text="Vote Avarage: 2112" />
 
         <TextView
-            android:layout_marginTop="10dp"
-            style="@style/OverviewDetailText"
             android:id="@+id/tv_overview"
+            style="@style/OverviewDetailText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/iv_poster"
+            android:layout_marginTop="10dp"
             tools:text="The Big Bang Theory is centered on five characters living in Pasadena, California: roommates Leonard Hofstadter and Sheldon Cooper" />
 
+        <TextView
+            android:layout_margin="10dp"
+            style="@style/InfoDetailText"
+            android:id="@+id/tv_cast_title"
+            android:layout_below="@id/tv_overview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cast:"/>
+
+        <FrameLayout
+            android:layout_below="@id/tv_cast_title"
+            android:id="@+id/your_placeholder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </FrameLayout>
     </RelativeLayout>
+
 </android.support.v4.widget.NestedScrollView>

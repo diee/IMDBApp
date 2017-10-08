@@ -3,6 +3,7 @@ package com.example.dalarcon.imdbapp.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -11,26 +12,29 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.load.resource.drawable.GlideDrawable;
-import com.bumptech.glide.request.RequestListener;
-import com.bumptech.glide.request.target.Target;
 import com.example.dalarcon.imdbapp.BuildConfig;
 import com.example.dalarcon.imdbapp.R;
-import com.example.dalarcon.imdbapp.model.Movie;
-import com.example.dalarcon.imdbapp.model.Serie;
+import com.example.dalarcon.imdbapp.model.credits.Cast;
+import com.example.dalarcon.imdbapp.model.discover.Movie;
+import com.example.dalarcon.imdbapp.service.ImdbAPI;
+import com.example.dalarcon.imdbapp.service.ImdbCreditsResponse;
+import com.example.dalarcon.imdbapp.ui.fragment.CreditFragment;
+import com.example.dalarcon.imdbapp.util.NetworkUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
-public class DetailActivity extends AppCompatActivity {
+public class DetailMovieActivity extends AppCompatActivity {
 
     public static final String INTENT_OBJECT = "object";
     public static final String INTENT_POSTER_URL = "posterUrl";
     public static final String INTENT_NAME = "name";
-
-    Movie mMovie;
-    Serie mSerie;
 
     @BindView(R.id.iv_backdrop)
     ImageView mBackdropImageView;
@@ -69,50 +73,25 @@ public class DetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail);
+        setContentView(R.layout.activity_movie_detail);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ButterKnife.bind(this);
 
         Bundle extras = getIntent().getExtras();
-        Object object = extras.getSerializable(INTENT_OBJECT);
+        Movie movie = extras.getParcelable(INTENT_OBJECT);
+        loadData(movie);
 
-        if (object instanceof Movie) {
-            mMovie = (Movie) object;
-            setBackdropImage(mMovie.getBackdropPath());
-            setImage(mMovie.getPosterPath());
-            setTitle(mMovie.getTitle());
-            setReleaseDate(mMovie.getReleaseDate());
-            setOriginalLanguage(mMovie.getOriginalLanguage());
-            mOriginCountryTextview.setVisibility(View.GONE);
-            mPublicTextView.setText(mMovie.getAdult() ?
-                    getString(R.string.adult_only_text) : getString(R.string.not_adult_only_text));
-            setOverview(mMovie.getOverview());
-            setPopularity(mMovie.getPopularity() + "");
-            setVoteAvarage(mMovie.getVoteAverage() + "");
+        if (NetworkUtils.isWifiConnected(this)) {
+            Observable<ImdbCreditsResponse> imdbCreditsResponse = ImdbAPI.getApi()
+                    .getMovieCredits(movie.getId(), BuildConfig.API_KEY);
 
-            mPosterImageView.setOnClickListener(view -> {
-                openPoster(mMovie.getTitle(), mMovie.getPosterPath());
-            });
-
-        } else if (object instanceof Serie) {
-            mSerie = (Serie) object;
-            setBackdropImage(mSerie.getBackdropPath());
-            setImage(mSerie.getPosterPath());
-            setTitle(mSerie.getName());
-            setReleaseDate(mSerie.getFirstAirDate());
-            setOriginalLanguage(mSerie.getOriginalLanguage());
-            mOriginCountryTextview.setText(getString(R.string.country_text, mSerie.getOriginCountry()));
-            mPublicTextView.setVisibility(View.GONE);
-            setOverview(mSerie.getOverview());
-            setPopularity(mSerie.getPopularity() + "");
-            setVoteAvarage(mSerie.getVoteAverage() + "");
-
-            mPosterImageView.setOnClickListener(view -> {
-                openPoster(mSerie.getName(), mSerie.getPosterPath());
-            });
+            imdbCreditsResponse.subscribeOn(Schedulers.newThread())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(imdbCredits -> loadCredits(imdbCredits.getCast()));
         }
+
     }
 
     @Override
@@ -149,31 +128,9 @@ public class DetailActivity extends AppCompatActivity {
 
     private void setImage(String urlImage) {
         String completePath = BuildConfig.BASE_URL_IMAGE + urlImage;
-        /*Glide.with(this)
-                .load(completePath)
-                .apply(new RequestOptions()
-                        .placeholder(R.mipmap.ic_launcher))
-                .into(mPosterImageView);
-        */
-
-        supportPostponeEnterTransition();
         Glide.with(this)
                 .load(completePath)
-                .centerCrop()
-                .dontAnimate()
-                .listener(new RequestListener<String, GlideDrawable>() {
-                    @Override
-                    public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
-                        supportStartPostponedEnterTransition();
-                        return false;
-                    }
-
-                    @Override
-                    public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
-                        supportStartPostponedEnterTransition();
-                        return false;
-                    }
-                })
+                .placeholder(R.mipmap.ic_launcher)
                 .into(mPosterImageView);
 
     }
@@ -195,6 +152,30 @@ public class DetailActivity extends AppCompatActivity {
         posterIntent.putExtra(INTENT_POSTER_URL, BuildConfig.BASE_URL_IMAGE + posterUrl);
         posterIntent.putExtra(INTENT_NAME, name);
         startActivity(posterIntent);
+    }
+
+    private void loadData(Movie movie) {
+        setTitle(movie.getName());
+        setBackdropImage(movie.getBackdropPath());
+        setImage(movie.getPosterPath());
+        setReleaseDate(movie.getReleaseDate());
+        setOriginalLanguage(movie.getOriginalLanguage());
+        setPopularity(movie.getPopularity() + "");
+        setOverview(movie.getOverview());
+        setVoteAvarage(movie.getVoteAverage() + "");
+        mPublicTextView.setText(movie.isAdult() ?
+                getString(R.string.adult_only_text) : getString(R.string.not_adult_only_text));
+        mPublicTextView.setVisibility(View.VISIBLE);
+
+        mPosterImageView.setOnClickListener(view -> {
+            openPoster(movie.getName(), movie.getPosterPath());
+        });
+    }
+
+    private void loadCredits(List<Cast> castList) {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.your_placeholder, new CreditFragment().newInstance((ArrayList<Cast>) castList));
+        ft.commit();
     }
 
 }

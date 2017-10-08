@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Labels for filter year -->
+    <array name="pref_year_option_labels">
+        <item>@string/pref_year_2017_label</item>
+        <item>@string/pref_year_2016_label</item>
+        <item>@string/pref_year_2015_label</item>
+        <item>@string/pref_year_2014_label</item>
+        <item>@string/pref_year_2013_label</item>
+        <item>@string/pref_year_all_label</item>
+    </array>
+
+    <array name="pref_year_option_values">
+        <item>@string/pref_year_2017_value</item>
+        <item>@string/pref_year_2016_value</item>
+        <item>@string/pref_year_2015_value</item>
+        <item>@string/pref_year_2014_value</item>
+        <item>@string/pref_year_2013_value</item>
+        <item>@string/pref_year_default_value</item>
+    </array>
+</resources>

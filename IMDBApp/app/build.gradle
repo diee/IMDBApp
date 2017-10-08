@@ -6,7 +6,7 @@ android {
     buildToolsVersion "26.0.1"
     defaultConfig {
         applicationId "com.example.dalarcon.imdbapp"
-        minSdkVersion 19
+        minSdkVersion 23
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
@@ -16,6 +16,9 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField 'String', 'BASE_URL', '"https://api.themoviedb.org/3/"'
+            buildConfigField 'String', 'BASE_URL_IMAGE', '"http://image.tmdb.org/t/p/original/"'
+            buildConfigField 'String', 'API_KEY', '"a63a4bd70daddb27d21f7dd323c9da39"'
         }
         debug {
             buildConfigField 'String', 'BASE_URL', '"https://api.themoviedb.org/3/"'
@@ -34,11 +37,11 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-
     compile 'com.android.support:support-v4:26.0.1'
-    testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:26.0.1'
     compile 'com.android.support:design:26.0.1'
+    compile 'com.android.support:preference-v7:26.0.1'
+    testCompile 'junit:junit:4.12'
 
     // JSON Converter
     compile 'com.squareup.retrofit2:converter-gson:2.3.0'
@@ -52,8 +55,8 @@ dependencies {
     compile 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
 
     //ButterKnife
-    compile 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    compile 'com.jakewharton:butterknife:8.8.1'
 
     //CardView & Recycler
     compile 'com.android.support:cardview-v7:26.0.1'
@@ -61,5 +64,4 @@ dependencies {
 
     //Glide
     compile 'com.github.bumptech.glide:glide:3.7.0'
-
 }

@@ -12,22 +12,19 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ImdbAPI {
 
-    private ImdbService imdbService;
+    private static ImdbService imdbService;
 
-    public ImdbAPI() {
+    public static ImdbService getApi() {
+        if (imdbService == null) {
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl(BuildConfig.BASE_URL)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                    .build();
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BuildConfig.BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .build();
-
-        imdbService = retrofit.create(ImdbService.class);
-    }
-
-    public ImdbService getImdbService() {
+            imdbService = retrofit.create(ImdbService.class);
+        }
         return imdbService;
     }
-
 
 }

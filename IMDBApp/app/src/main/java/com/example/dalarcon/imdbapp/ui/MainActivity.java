@@ -1,8 +1,6 @@
-package com.example.dalarcon.imdbapp;
+package com.example.dalarcon.imdbapp.ui;
 
-import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -14,8 +12,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.example.dalarcon.imdbapp.ui.MoviesFragment;
-import com.example.dalarcon.imdbapp.ui.SeriesFragment;
+import com.example.dalarcon.imdbapp.R;
+import com.example.dalarcon.imdbapp.ui.fragment.MovieFragment;
+import com.example.dalarcon.imdbapp.ui.fragment.SerieFragment;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -53,6 +52,8 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.action_settings) {
+            Intent startSettingsActivity = new Intent(this, SettingsActivity.class);
+            startActivity(startSettingsActivity);
             return true;
         }
 
@@ -70,9 +71,9 @@ public class MainActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    return MoviesFragment.newInstance();
+                    return MovieFragment.newInstance();
                 case 1:
-                    return SeriesFragment.newInstance();
+                    return SerieFragment.newInstance();
                 default:
                     return null;
 
@@ -95,10 +96,5 @@ public class MainActivity extends AppCompatActivity {
             }
             return null;
         }
-    }
-
-    public static boolean isWifiConnected(Context c) {
-        ConnectivityManager connManager = (ConnectivityManager) c.getSystemService(Context.CONNECTIVITY_SERVICE);
-        return connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).isConnected();
     }
 }

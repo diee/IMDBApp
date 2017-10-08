@@ -1,7 +1,5 @@
 package com.example.dalarcon.imdbapp.service;
 
-import com.example.dalarcon.imdbapp.model.Movie;
-import com.example.dalarcon.imdbapp.model.Serie;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -11,7 +9,7 @@ import java.util.List;
  * Created by administrador on 9/27/17.
  */
 
-public class ImdbMovieResponse {
+public class ImdbDiscoverResponse<T> {
 
     @SerializedName("page")
     @Expose
@@ -24,7 +22,7 @@ public class ImdbMovieResponse {
     private Integer totalPages;
     @SerializedName("results")
     @Expose
-    private List<Movie> movies = null;
+    private List<T> results = null;
 
     public Integer getPage() {
         return page;
@@ -50,12 +48,11 @@ public class ImdbMovieResponse {
         this.totalPages = totalPages;
     }
 
-    public List<Movie> getMovies() {
-        return movies;
+    public List<T> getResults() {
+        return results;
     }
 
-    public void setMovies(List<Movie> movies) {
-        this.movies = movies;
+    public void setResults(List<T> results) {
+        this.results = results;
     }
-
 }
