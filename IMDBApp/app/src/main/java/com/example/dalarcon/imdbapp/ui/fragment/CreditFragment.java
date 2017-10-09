@@ -46,7 +46,7 @@ public class CreditFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mCastList = getArguments().getParcelableArrayList("cast_list");
+            mCastList = getArguments().getParcelableArrayList(CAST_LIST);
         }
         mCastAdapter = new CastAdapter(getActivity());
         mLinearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
